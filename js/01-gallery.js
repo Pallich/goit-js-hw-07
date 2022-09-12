@@ -6,6 +6,8 @@ const galleryDestination = document.querySelector(".gallery");
 galleryDestination.addEventListener("click", showFullImage);
 
 const createGallery = createImage(galleryItems);
+// galleryDestination.insertAdjacentHTML("beforeend", createGallery);
+galleryDestination.innerHTML = createGallery;
 
 function createImage(galleryItems) {
   return galleryItems
@@ -19,12 +21,16 @@ function createImage(galleryItems) {
     .join(" ");
 }
 
-galleryDestination.insertAdjacentHTML("beforeend", createGallery);
-
 function showFullImage(evt) {
-  if (!evt.target.classList.contains("gallery__image")) {
+  if (evt.target.nodeName !== "IMG") {
     return;
   }
   console.log(evt.target);
+  //   const targetedImgUrl = evt.target.dataset.source;
+  //   const instance = basicLightbox.create(`
+  //     <img src="${targetedImgUrl}" width="800" height="600">
+  // `);
+
+  //   instance.show();
   //   evt.src = "https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825_1280.jpg";
 }
