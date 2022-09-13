@@ -26,7 +26,7 @@ function showFullImage(evt) {
     return;
   }
 
-  preventDefault();
+  evt.preventDefault();
   console.log(evt.target);
   //   const targetedImgUrl = evt.target.dataset.source;
   //   const instance = basicLightbox.create(`
