@@ -14,7 +14,10 @@ function createImage(galleryItems) {
     .map((image) => {
       return `<div class="gallery__item">
   <a href="" class="gallery__link">
-    <img src="${image.preview}" alt="${image.description}" class="gallery__image" />
+    <img src="${image.preview}" 
+    data-source = '${image.original}'
+    alt="${image.description}" 
+    class="gallery__image" />
   </a>
 </div>`;
     })
@@ -22,18 +25,20 @@ function createImage(galleryItems) {
 }
 
 function showFullImage(evt) {
-  if (evt.target.nodeName !== "IMG") {
+  evt.preventDefault();
+
+  if (evt.target.nodeName !== "IMG" && evt.currentTarget.nodeName !== "IMG") {
     return;
   }
 
-  evt.preventDefault();
-  console.log(evt.target);
-  //   const targetedImgUrl = evt.target.dataset.source;
-  //   const instance = basicLightbox.create(`
-  //       <img src="${targetedImgUrl}" width="800" height="600">
-  //   `);
+  const newUrl = evt.target.dataset.source;
 
-  //   instance.show();
-
-  //   evt.src = "https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825_1280.jpg";
+  const instance = basicLightbox.create(`<img src="${newUrl}" >`);
+  instance.show(
+    document.addEventListener("keydown", (evt) => {
+      if (evt.code === "Escape") {
+        instance.close();
+      }
+    })
+  );
 }
